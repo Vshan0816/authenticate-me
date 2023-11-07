@@ -24,11 +24,7 @@ module AuthenticateMe
     config.load_defaults 7.0
 
     # Configuration for the application, engines, and railties goes here
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore,
-      key: '_auth_me_session',
-      same_site: :lax, 
-      secure: Rails.env.production?.
+ 
     #
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
@@ -40,5 +36,11 @@ module AuthenticateMe
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore,
+      key: '_auth_me_session',
+      same_site: :lax, 
+      secure: Rails.env.production?
   end
 end
